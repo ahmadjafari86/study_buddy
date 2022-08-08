@@ -1,9 +1,15 @@
-<nav>
+<nav style="display:flex; width: 100%; justify-content: space-between;">
+    <a href="admin/">
+        <h1>Admin</h1>
+    </a>
     <a href="{% url 'home' %}">
         <h1>Home</h1>
     </a>
     <a href="{% url 'room' 1 %}">
         <h1>Room</h1>
+    </a>
+    <a href="{% url 'create-room' %}">
+        <h1>Create Room</h1>
     </a>
 </nav>
 <hr>
