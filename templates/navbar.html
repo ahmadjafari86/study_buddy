@@ -12,6 +12,7 @@
         <h1>Create Room</h1>
     </a>
     {% if request.user.is_authenticated  %}
+        <p>Hello {{ request.user }}</p>
         <a href="{% url 'logout' %}">
             <h1>Logout</h1>
         </a>

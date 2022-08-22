@@ -1,22 +1,41 @@
 {% extends 'main.html' %}
 {% block content %}
-    <div>
-        <form method="POST" action="">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="username">User name</label>
-              <input type="text" name="username" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="Password">Password</label>
-              <input type="password" name="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-    </div>
+{% if page == 'login' %}
+
+<div>
+  <form method="POST" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username">User name</label>
+        <input type="text" name="username" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <p>Haven't signed up yet?</p>
+    <a href="{% url 'register' %}">Sign up</a>
+</div>
+
+{% else %}
+
+<div>
+  <form method="POST" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p>Already signed up</p>
+    <a href="{% url 'login' %}">Login</a>
+</div>
+
+{% endif %}
+
 {% endblock content %}
