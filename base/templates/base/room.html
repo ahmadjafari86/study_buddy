@@ -1,5 +1,42 @@
 {% extends 'main.html' %}
 {% block content %}
-    <h1>Room Page</h1>
-    <h3>{{ room.name}}</h3>
+
+    <div class="container-fluid">
+        <main class="ccontainer">
+            <h1>Room Page</h1>
+            <h3>{{ room.name}}</h3>
+            <p>{{ room.description }}</p>
+            <div class="comments-wrapper">
+                <p>Conversation</p>
+                <hr/>
+                {% for message in room_messages %}
+                <div class="comment-card card p-2 mb-2">
+                    <small>@{{message.user}} {{message.created | timesince}} ago</small>
+                    <p class="mt-2 ml-2">{{ message.body }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        
+            {% if request.user.is_authenticated %}  
+            <div>
+                <form class="form-inline" method="POST" action="">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2" name="comment" type="text" placeholder="Write your comment..." aria-label="comment">
+                    <button class="btn btn-outline-success my-2 my-sm-0" name="submit" type="submit">Post</button>
+                </form>
+            </div>
+            {% endif %}
+        </main>
+        <aside class="ccontainer participants">
+            <h3>participants</h3>
+            <hr/>
+
+            {% for user in participants  %}
+            <div>
+                <p>@{{user.username}}</p>
+            </div>
+            {% endfor %}
+        </aside>
+    </div>
+    
 {% endblock content %}
